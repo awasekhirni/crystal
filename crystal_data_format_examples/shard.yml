@@ -1,0 +1,44 @@
+name: crystal_data_format_examples
+version: 0.1.0
+description: |
+  13 self-contained Crystal examples covering data formats from the stdlib
+  (File, XML, CSV, JSON, JSONL), shards (xlsx, pdf), external tools (DuckDB,
+  ncdump), and manual parsers (RDF, Protobuf, TextProto, Email).
+
+# Most examples are stdlib-only and need NO dependencies. The shards below are
+# OPTIONAL: only needed if you want to run the real (non-fallback) path of the
+# files marked "shard" in the table. Each such file degrades to a working
+# fallback if the shard isn't installed.
+#
+# To enable: uncomment the dependencies you want, then run `shards install`.
+
+dependencies:
+  # 006_xlsx.cr - real .xlsx read/write (falls back to CSV if absent)
+  xlsx:
+    github: nicolabernardy/xlsx
+
+  # 007_pdf.cr - PDF generation (falls back to HTML if absent)
+  pdf:
+    github: crystal-pdf/pdf
+
+  # 011_protobuf.cr - Protobuf message support (raw wire-format demo runs without it)
+  protobuf:
+    github: jeromegn/protobuf.cr
+
+  # 013_email.cr - SMTP sending (raw RFC 5322 message building runs without it)
+  email:
+    github: arcage/crystal-email
+
+# External CLI tools (NOT Crystal shards - install via your OS package manager):
+#   - 008_parquet.cr  needs the `duckdb` CLI  (falls back to CSV columnar demo)
+#   - 009_netcdf.cr   needs the `ncdump` CLI  (uses an embedded sample header)
+
+targets:
+  # Not a real target - the examples are standalone scripts run via
+  # `crystal <NNN>_*.cr`. This target exists only to satisfy `shards`.
+  noop:
+    main: 001_file.cr
+
+crystal: ">= 1.0.0"
+
+license: MIT
